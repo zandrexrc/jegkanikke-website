@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jeg kan ikke</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        font-size: 18px;
+        width: 100%;
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+        background-color: #00856a;
+        background-image: url("https://www.transparenttextures.com/patterns/food.png");
+      }
+
+      #container {
+        width: 50%;
+        max-width: 500px;
+        padding: 2.5rem;
+        border-radius: 2.5rem;
+        background-color: white;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      #excuse-text {
+        min-height: 350px;
+        line-height: 2;
+      }
+
+      button {
+        outline: none;
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Jeg kan ikke fordi -</h1>
+      <p id="excuse-text">Jeg vil ikke.</p>
+      <button onclick="displayRandomExcuse()">Ny unnskyldning</button>
+    </div>
+
+    <script>
+      const API_EXCUSES_ENDPOINT = "https://api.jegkanikke.no/excuses";
+
+      // Define initial state
+      let excuses = ["Jeg vil ikke"];
+
+      const fetchExcuses = async () => {
+        try {
+          const res = await fetch(API_EXCUSES_ENDPOINT);
+          const data = await res.json();
+          const excuses = data.map((item) => item.message);
+          return excuses;
+        } catch (error) {
+          throw error;
+        }
+      };
+
+      const getRandomExcuse = () => {
+        return excuses[Math.floor(Math.random() * excuses.length)];
+      };
+
+      const displayRandomExcuse = () => {
+        const excuseTextEl = document.body.querySelector("#excuse-text");
+        const currentExcuse = excuseTextEl.innerHTML;
+        let randomExcuse = getRandomExcuse();
+
+        while (currentExcuse === randomExcuse) {
+          randomExcuse = getRandomExcuse();
+        }
+
+        excuseTextEl.innerHTML = randomExcuse;
+      };
+
+      // Fetch data on app start
+      fetchExcuses()
+        .then((res) => {
+          // Show random excuse
+          excuses = res;
+          displayRandomExcuse();
+        })
+        .catch((error) => {
+          console.log('@TODO: handle error');
+        });
+    </script>
+  </body>
+</html>
