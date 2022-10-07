@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeg kan ikke - 404</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
@@ -38,19 +39,24 @@
         line-height: 2;
       }
 
-      button {
-        outline: none;
-        border: none;
-        border-radius: 1rem;
-        padding: 1rem 2rem;
+      a {
+        color: #00856a;
+        text-decoration-color: #00856a;
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.5em;
         cursor: pointer;
-        font-size: 1rem;
+        transition: all 0.1s ease-in-out;
+      }
+
+      a:hover {
+        text-decoration-color: transparent;
       }
     </style>
   </head>
   <body>
     <div id="container">
-      <h1>Page not found :/</h1>
+      <h1>Side ikke funnet :/</h1>
+      <a href="/"> Gå hjem. </a>
     </div>
   </body>
 </html>
