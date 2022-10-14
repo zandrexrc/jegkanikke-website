@@ -114,23 +114,8 @@
       &#x1F608;<span> Laget av Zandrex</span>
     </a>
 
+    <script src="./excuses.js"></script>
     <script>
-      const API_EXCUSES_ENDPOINT = "https://api.jegkanikke.no/excuses";
-
-      // Define initial state
-      let excuses = ["Jeg vil ikke"];
-
-      const fetchExcuses = async () => {
-        try {
-          const res = await fetch(API_EXCUSES_ENDPOINT);
-          const data = await res.json();
-          const excuses = data.map((item) => item.message);
-          return excuses;
-        } catch (error) {
-          throw error;
-        }
-      };
-
       const getRandomExcuse = () => {
         return excuses[Math.floor(Math.random() * excuses.length)];
       };
@@ -140,23 +125,15 @@
         const currentExcuse = excuseTextEl.innerHTML;
         let randomExcuse = getRandomExcuse();
 
-        while (currentExcuse === randomExcuse) {
+        while (randomExcuse === currentExcuse) {
           randomExcuse = getRandomExcuse();
         }
 
         excuseTextEl.innerHTML = randomExcuse;
       };
 
-      // Fetch data on app start
-      fetchExcuses()
-        .then((res) => {
-          // Show random excuse
-          excuses = res;
-          displayRandomExcuse();
-        })
-        .catch((error) => {
-          console.log("@TODO: handle error");
-        });
+      // Display random excuse on app start
+      displayRandomExcuse();
     </script>
   </body>
 </html>
