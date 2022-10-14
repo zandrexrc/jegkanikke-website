@@ -14,15 +14,19 @@
         --color-background: #f8f8f8;
         --color-accent: #00856a; /* 00796b */
         --color-accent-dark: #00573f;
-        --font-size: 18px;
-        --line-height-heading: 1.2;
-        --line-height-body: 2;
+        --font-size-default: 18px;
+        --font-size-small: 14px;
+        --line-height-default: 2;
+        --line-height-small: 1.6;
+      }
+
+      html {
+        font-family: "Poppins", sans-serif;
+        font-size: var(--font-size-default);
       }
 
       body {
         margin: 0;
-        font-family: "Poppins", sans-serif;
-        font-size: var(--font-size);
         width: 100%;
         height: 100vh;
         min-height: 600px;
@@ -38,8 +42,8 @@
       #container {
         width: 50%;
         max-width: 500px;
-        padding: 2.5rem;
-        border-radius: 2.5rem;
+        padding: 2rem;
+        border-radius: 2rem;
         background-color: var(--color-background);
         display: flex;
         flex-flow: column nowrap;
@@ -49,19 +53,20 @@
 
       #excuse-text {
         height: calc(
-          var(--font-size) * var(--line-height-body) * 5
+          var(--font-size-default) * var(--line-height-default) * 5
         ); /* font size * line height * number of lines */
-        line-height: 2;
+        line-height: var(--line-height-default);
         overflow: auto;
-        margin-bottom: 2.5rem;
+        margin-bottom: 2rem;
       }
 
       button {
         outline: none;
         border: none;
         border-radius: 1rem;
-        padding: 1rem 2rem;
-        font-size: 1rem;
+        padding: 0.8rem 1.6rem;
+        font-size: var(--font-size-small);
+        font-family: "Poppins", sans-serif;
         color: var(--color-text-contrast);
         background-color: var(--color-accent);
         cursor: pointer;
@@ -70,13 +75,13 @@
 
       button:hover {
         background-color: var(--color-accent-dark);
-      } 
+      }
 
       #creds {
         position: absolute;
         bottom: 0;
         right: 0;
-        padding: 0.8rem 0 0.8rem 1rem;
+        padding: 0.8rem 0 0.4rem 1rem;
         border-radius: 1rem 0 0 0;
         display: flex;
         align-items: center;
@@ -92,12 +97,28 @@
         padding-left: 0.8rem;
         overflow: hidden;
         white-space: nowrap;
+        font-size: 0.8rem;
         transition: all 0.3s ease-in;
       }
 
       #creds:hover span {
         width: 100%;
         padding-right: 0.8rem;
+      }
+
+      @media (max-width: 600px) {
+        html {
+          font-size: var(--font-size-small);
+        }
+        body {
+          min-height: 420px;
+        }
+        #excuse-text {
+          height: calc(
+            var(--font-size-small) * var(--line-height-small) * 5
+          ); /* font size * line height * number of lines */
+          line-height: var(--line-height-small);
+        }
       }
     </style>
   </head>
